@@ -21,7 +21,7 @@ clock = pygame.time.Clock()
 botoes = [
     menu.Botao(540, 400, "imagens/play.png", "imagens/play.png", iniciar_jogo),
     menu.Botao(540, 470, "imagens/ajustes.png", "imagens/ajustes.png", opcoes),
-    menu.Botao(540, 540, "imagens/play.png", "imagens/play.png", sair)
+    menu.Botao(540, 540, "imagens/sair.png", "imagens/sair.png", sair)
 ]
 
 running = True
