@@ -1,5 +1,7 @@
 import pygame
 import menu
+import ajustes
+
 
 # Definir ações dos botões
 def iniciar_jogo():
@@ -7,7 +9,7 @@ def iniciar_jogo():
     
 
 def opcoes():
-    print("aqui vai ficar a tela de opção")
+    ajustes.ajustes_tela(screen)
 
 def sair():
     pygame.quit()
