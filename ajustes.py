@@ -4,7 +4,6 @@ def ajustes_tela(screen):
     pygame.init()
     clock = pygame.time.Clock()
 
-    # Fonte personalizada (coloque "Silkscreen-Regular.ttf" em /imagens)
     try:
         fonte = pygame.font.Font("imagens/Silkscreen.ttf", 30)
     except:
