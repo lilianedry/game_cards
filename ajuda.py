@@ -7,7 +7,7 @@ def ajuda_tela(screen):
     # --- Fontes SEPARADAS para título e texto ---
     try:
         fonte_titulo = pygame.font.Font("imagens/Silkscreen.ttf", 30)  
-        fonte_texto = pygame.font.Font("imagens/Silkscreen.ttf", 15)  
+        fonte_texto = pygame.font.Font("imagens/Silkscreen.ttf", 20)  
     except:
         fonte_titulo = pygame.font.Font(None, 50)  
         fonte_texto = pygame.font.Font(None, 25)   
@@ -20,18 +20,18 @@ def ajuda_tela(screen):
     LINE_COLOR = (150, 150, 150)
 
     icones = {
-        "pobreza": pygame.image.load("imagens/ajuda.png").convert_alpha(),
-        "saude": pygame.image.load("imagens/ajuda.png").convert_alpha(),
-        "educacao": pygame.image.load("imagens/ajuda.png").convert_alpha(),
-        "vida": pygame.image.load("imagens/ajuda.png").convert_alpha()
+        "pobreza": pygame.image.load("imagens/economia.png").convert_alpha(),
+        "saude": pygame.image.load("imagens/saude.png").convert_alpha(),
+        "educacao": pygame.image.load("imagens/educacao.png").convert_alpha(),
+        "vida": pygame.image.load("imagens/natureza.png").convert_alpha()
     }
 
     for chave in icones:
         icones[chave] = pygame.transform.smoothscale(icones[chave], (40, 40))
 
     textos = [
-        ("pobreza", "POBREZA - Mede a desigualdade social. Valores altos indicam crise econômica."),
-        ("saude", "SAUDE - Representa o bem-estar da população. Mantenha o equilíbrio."),
+        ("pobreza", "POBREZA - Mede a desigualdade social. Valores altos indicam crise economica."),
+        ("saude", "SAUDE - Representa o bem-estar da populacao. Mantenha o equilibrio."),
         ("educacao", "EDUCACAO - Reflete o acesso ao conhecimento e desenvolvimento do país."),
         ("vida", "VIDA TERRESTRE - Mostra o estado da natureza e dos ecossistemas. Preserve-a.")
     ]
