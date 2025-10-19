@@ -2,10 +2,11 @@ import pygame
 import menu
 import ajustes
 import ajuda
+import jogo
 
 # --- Ações dos botões ---
 def iniciar_jogo():
-    print("aqui fica a tela de inicio")
+    jogo.rodar_jogo(screen)
 
 def opcoes():
     ajustes.ajustes_tela(screen)
