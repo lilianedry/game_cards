@@ -4,6 +4,8 @@ import os
 import textwrap
 import ajustes  # Tela de ajustes
 import pause    # Tela de pause
+import fim_de_jogo
+
 
 
 def load_image_safe(path, size=None, alpha=True):
@@ -168,9 +170,14 @@ def rodar_jogo(screen):
                 # Clique no botão de ajustes
                 if ajuste_rect.collidepoint(event.pos):
                     ajustes.ajustes_tela(screen)
+                
                 # Clique no botão de pause
                 elif pause_rect.collidepoint(event.pos):
-                    pause.pause_tela(screen)
+                    acao = pause.pause_tela(screen)
+                    if acao == "menu":
+                        print("🔁 Voltando ao menu principal...")
+                        return  # Sai de rodar_jogo() e volta ao main.py
+                
                 # Clique na carta
                 elif not game_over and card_rect.collidepoint(event.pos):
                     dragging = True
@@ -263,16 +270,12 @@ def rodar_jogo(screen):
 
         # --- fim de jogo ---
         if game_over:
-            overlay = pygame.Surface((SCREEN_W, SCREEN_H), pygame.SRCALPHA)
-            overlay.fill((0, 0, 0, 160))
-            screen.blit(overlay, (0, 0))
-            msg = "Voce salvou o mundo! 🎉" if win else "Uma ODS chegou a 0. Fim de jogo."
-            msg_surf = FONT_BIG.render(msg, True, (255, 255, 255))
-            msg_rect = msg_surf.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 - 10))
-            screen.blit(msg_surf, msg_rect.topleft)
-            info_surf = FONT.render("Pressione R para reiniciar, ESC para voltar ao menu.", True, (230, 230, 230))
-            info_rect = info_surf.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 + 30))
-            screen.blit(info_surf, info_rect.topleft)
+            from fim_de_jogo import tela_fim_de_jogo
+            escolha = tela_fim_de_jogo(screen, venceu=win)
+            if escolha == "reiniciar":
+                return rodar_jogo(screen)      # reinicia o jogo
+            elif escolha == "menu":
+                return                        # volta ao main.py
 
         pygame.display.flip()
         clock.tick(60)
