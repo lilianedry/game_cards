@@ -55,7 +55,7 @@ def calcular_altura_texto(lines, font, line_spacing=6):
     return max(0, h - line_spacing)
 
 
-def rodar_jogo(screen):
+def rodar_jogo(screen,  progresso_carregado=None):
     clock = pygame.time.Clock()
 
     try:
@@ -96,118 +96,125 @@ def rodar_jogo(screen):
     # --- posições dos botões ---
     ajuste_rect = ajuste_icon.get_rect(topright=(SCREEN_W - 20, 20))
     pause_rect = pause_icon.get_rect(topleft=(20, 20))
-
+    if progresso_carregado:
+        ods = progresso_carregado.get("ods", {"ODS1": 5, "ODS3": 5, "ODS4": 5, "ODS15": 5})
+        current_index = progresso_carregado.get("current_index", 0)
+        cards = progresso_carregado.get("cards", [])
+        carta_jogo = progresso_carregado.get("rem", 0)
+    else:
     # --- estado inicial ---
-    ods = {"ODS1": 5, "ODS3": 5, "ODS4": 5, "ODS15": 5}
+        ods = {"ODS1": 5, "ODS3": 5, "ODS4": 5, "ODS15": 5}
 
+        carta_jogo=10
+    
     # --- cartas ---
-    cards = [
+        cards = [
     # Cartas mais balanceadas com trade-offs mais difíceis
-    {"text": "A populacao mais pobre enfrenta escassez apos seca. Voce libera auxilio emergencial nacional?",
-     "right": [("ODS1", -2), ("ODS4", -2), ("ODS15", +1)],
-     "left": [("ODS1", +2), ("ODS3", -1)]},
+        {"text": "A populacao mais pobre enfrenta escassez apos seca. Voce libera auxilio emergencial nacional?",
+         "right": [("ODS1", -2), ("ODS4", -2), ("ODS15", +1)],
+         "left": [("ODS1", +2), ("ODS3", -1)]},
     
-    {"text": "Um surto ameaca a populacao rural. Tornar vacina obrigatoria?",
-     "right": [("ODS3", +2), ("ODS1", -1)],
-     "left": [("ODS3", -2), ("ODS1", +1)]},
+        {"text": "Um surto ameaca a populacao rural. Tornar vacina obrigatoria?",
+         "right": [("ODS3", +2), ("ODS1", -1)],
+         "left": [("ODS3", -2), ("ODS1", +1)]},
     
-    {"text": "Investir em energia solar e hortas nas escolas publicas?",
-     "right": [("ODS4", +2), ("ODS15", +1), ("ODS1", -2)],
-     "left": [("ODS4", -2), ("ODS1", +2)]},
+        {"text": "Investir em energia solar e hortas nas escolas publicas?",
+         "right": [("ODS4", +2), ("ODS15", +1), ("ODS1", -2)],
+         "left": [("ODS4", -2), ("ODS1", +2)]},
     
-    {"text": "Autorizar ampliar cultivo em reservas naturais para aumentar alimentos?",
-     "right": [("ODS1", +2), ("ODS15", -3), ("ODS3", -1)],
-     "left": [("ODS15", +2), ("ODS1", -2)]},
+        {"text": "Autorizar ampliar cultivo em reservas naturais para aumentar alimentos?",
+         "right": [("ODS1", +2), ("ODS15", -3), ("ODS3", -1)],
+         "left": [("ODS15", +2), ("ODS1", -2)]},
+
+        {"text": "Implementar ensino remoto obrigatorio para areas rurais?",
+         "right": [("ODS4", +2), ("ODS3", -2), ("ODS1", -1)],
+         "left": [("ODS4", -2), ("ODS15", +1)]},
     
-    {"text": "Implementar ensino remoto obrigatorio para areas rurais?",
-     "right": [("ODS4", +2), ("ODS3", -2), ("ODS1", -1)],
-     "left": [("ODS4", -2), ("ODS15", +1)]},
+        {"text": "Autorizar novos pesticidas para aumentar producao agricola?",
+         "right": [("ODS1", +2), ("ODS15", -2), ("ODS3", -2)],
+         "left": [("ODS15", +2), ("ODS3", +1), ("ODS1", -1)]},
     
-    {"text": "Autorizar novos pesticidas para aumentar producao agricola?",
-     "right": [("ODS1", +2), ("ODS15", -2), ("ODS3", -2)],
-     "left": [("ODS15", +2), ("ODS3", +1), ("ODS1", -1)]},
+        {"text": "Criar programa nacional de profissionais em medicina ambiental?",
+         "right": [("ODS3", +2), ("ODS15", +1), ("ODS1", -2)],
+         "left": [("ODS3", -2), ("ODS1", +1)]},
     
-    {"text": "Criar programa nacional de profissionais em medicina ambiental?",
-     "right": [("ODS3", +2), ("ODS15", +1), ("ODS1", -2)],
-     "left": [("ODS3", -2), ("ODS1", +1)]},
+        {"text": "Obrigar cada empresa a plantar arvores proporcionalmente aos seus funcionarios?",
+         "right": [("ODS15", +2), ("ODS1", -2), ("ODS4", -1)],
+         "left": [("ODS1", +2), ("ODS15", -2)]},
     
-    {"text": "Obrigar cada empresa a plantar arvores proporcionalmente aos seus funcionarios?",
-     "right": [("ODS15", +2), ("ODS1", -2), ("ODS4", -1)],
-     "left": [("ODS1", +2), ("ODS15", -2)]},
+        {"text": "Reduzir ultraprocessados mesmo que afete empregos na industria?",
+         "right": [("ODS3", +2), ("ODS1", -3), ("ODS4", -1)],
+         "left": [("ODS1", +2), ("ODS3", -1)]},
     
-    {"text": "Reduzir ultraprocessados mesmo que afete empregos na industria?",
-     "right": [("ODS3", +2), ("ODS1", -3), ("ODS4", -1)],
-     "left": [("ODS1", +2), ("ODS3", -1)]},
+        {"text": "Renda basica para quem cuida de areas de reflorestamento?",
+         "right": [("ODS1", -2), ("ODS15", +1), ("ODS4", -2)],
+         "left": [("ODS1", +2), ("ODS4", +1)]},
     
-    {"text": "Renda basica para quem cuida de areas de reflorestamento?",
-     "right": [("ODS1", -2), ("ODS15", +1), ("ODS4", -2)],
-     "left": [("ODS1", +2), ("ODS4", +1)]},
+        {"text": "Governo reduz drasticamente verbas em setores sociais para equilibrar as contas publicas.",
+         "right": [("ODS1", -3), ("ODS4", -2), ("ODS3", -1)],
+         "left": [("ODS1", +1), ("ODS15", -1)]},
     
-    {"text": "Governo reduz drasticamente verbas em setores sociais para equilibrar as contas publicas.",
-     "right": [("ODS1", -3), ("ODS4", -2), ("ODS3", -1)],
-     "left": [("ODS1", +1), ("ODS15", -1)]},
+        {"text": "Injecao massiva de capital em industrias, mas com flexibilizacao das leis ambientais.",
+         "right": [("ODS1", +3), ("ODS15", -3), ("ODS3", -2)],
+         "left": [("ODS15", +2), ("ODS1", -2)]},
     
-    {"text": "Injecao massiva de capital em industrias, mas com flexibilizacao das leis ambientais.",
-     "right": [("ODS1", +3), ("ODS15", -3), ("ODS3", -2)],
-     "left": [("ODS15", +2), ("ODS1", -2)]},
+        {"text": "Permitir mineracao em terras indigenas para gerar royalties para comunidades?",
+         "right": [("ODS1", +2), ("ODS15", -3), ("ODS4", -1)],
+         "left": [("ODS15", +2), ("ODS1", -2), ("ODS3", -1)]},
     
-    {"text": "Permitir mineracao em terras indigenas para gerar royalties para comunidades?",
-     "right": [("ODS1", +2), ("ODS15", -3), ("ODS4", -1)],
-     "left": [("ODS15", +2), ("ODS1", -2), ("ODS3", -1)]},
+        {"text": "Reduzir idade penal para combater violencia, afetando programas sociais?",
+         "right": [("ODS3", +1), ("ODS4", -2), ("ODS1", -2)],
+         "left": [("ODS4", +1), ("ODS1", +1), ("ODS3", -1)]},
     
-    {"text": "Reduzir idade penal para combater violencia, afetando programas sociais?",
-     "right": [("ODS3", +1), ("ODS4", -2), ("ODS1", -2)],
-     "left": [("ODS4", +1), ("ODS1", +1), ("ODS3", -1)]},
+        {"text": "Investir pesado em armamento para seguranca publica?",
+         "right": [("ODS3", +1), ("ODS1", -3), ("ODS4", -1)],
+         "left": [("ODS1", +2), ("ODS4", +1), ("ODS3", -1)]},
     
-    {"text": "Investir pesado em armamento para seguranca publica?",
-     "right": [("ODS3", +1), ("ODS1", -3), ("ODS4", -1)],
-     "left": [("ODS1", +2), ("ODS4", +1), ("ODS3", -1)]},
+        {"text": "Permitir cultivo transgenico em larga escala para combater fome?",
+         "right": [("ODS1", +2), ("ODS15", -2), ("ODS3", -1)],
+         "left": [("ODS15", +2), ("ODS1", -1), ("ODS3", +1)]},
     
-    {"text": "Permitir cultivo transgenico em larga escala para combater fome?",
-     "right": [("ODS1", +2), ("ODS15", -2), ("ODS3", -1)],
-     "left": [("ODS15", +2), ("ODS1", -1), ("ODS3", +1)]},
+        {"text": "Implementar pedagio urbano para reduzir congestionamentos e poluicao?",
+         "right": [("ODS15", +2), ("ODS3", +1), ("ODS1", -2)],
+         "left": [("ODS1", +2), ("ODS15", -1), ("ODS4", -1)]},
     
-    {"text": "Implementar pedagio urbano para reduzir congestionamentos e poluicao?",
-     "right": [("ODS15", +2), ("ODS3", +1), ("ODS1", -2)],
-     "left": [("ODS1", +2), ("ODS15", -1), ("ODS4", -1)]},
+        {"text": "Obrigar empresas a oferecerem creches gratuitas para funcionarias?",
+         "right": [("ODS4", +2), ("ODS1", +1), ("ODS3", -2)],
+         "left": [("ODS3", +2), ("ODS4", -2), ("ODS1", -1)]},
     
-    {"text": "Obrigar empresas a oferecerem creches gratuitas para funcionarias?",
-     "right": [("ODS4", +2), ("ODS1", +1), ("ODS3", -2)],
-     "left": [("ODS3", +2), ("ODS4", -2), ("ODS1", -1)]},
+        {"text": "Destinar verba de saude para campanhas de prevencao em vez de tratamentos?",
+         "right": [("ODS3", +1), ("ODS4", +1), ("ODS1", -2)],
+         "left": [("ODS1", +2), ("ODS3", -2), ("ODS4", -1)]},
     
-    {"text": "Destinar verba de saude para campanhas de prevencao em vez de tratamentos?",
-     "right": [("ODS3", +1), ("ODS4", +1), ("ODS1", -2)],
-     "left": [("ODS1", +2), ("ODS3", -2), ("ODS4", -1)]},
+        {"text": "Permitir queimadas controladas para agricultura tradicional?",
+         "right": [("ODS1", +2), ("ODS15", -3), ("ODS3", -2)],
+         "left": [("ODS15", +3), ("ODS1", -2), ("ODS3", +1)]},
     
-    {"text": "Permitir queimadas controladas para agricultura tradicional?",
-     "right": [("ODS1", +2), ("ODS15", -3), ("ODS3", -2)],
-     "left": [("ODS15", +3), ("ODS1", -2), ("ODS3", +1)]},
+        {"text": "Implementar semana de 4 dias nas escolas publicas para reduzir custos?",
+         "right": [("ODS4", -2), ("ODS1", +2), ("ODS15", +1)],
+         "left": [("ODS4", +2), ("ODS1", -2), ("ODS3", -1)]},
     
-    {"text": "Implementar semana de 4 dias nas escolas publicas para reduzir custos?",
-     "right": [("ODS4", -2), ("ODS1", +2), ("ODS15", +1)],
-     "left": [("ODS4", +2), ("ODS1", -2), ("ODS3", -1)]},
+        {"text": "Aprovar lei que permite trabalho infantil em negocios familiares?",
+         "right": [("ODS1", +2), ("ODS4", -3), ("ODS3", -2)],
+         "left": [("ODS4", +2), ("ODS3", +1), ("ODS1", -2)]},
     
-    {"text": "Aprovar lei que permite trabalho infantil em negocios familiares?",
-     "right": [("ODS1", +2), ("ODS4", -3), ("ODS3", -2)],
-     "left": [("ODS4", +2), ("ODS3", +1), ("ODS1", -2)]},
+        {"text": "Permitir patenteamento de sementes nativas por multinacionais?",
+         "right": [("ODS1", +1), ("ODS15", -3), ("ODS4", -1)],
+         "left": [("ODS15", +2), ("ODS1", -1), ("ODS4", +1)]},
     
-    {"text": "Permitir patenteamento de sementes nativas por multinacionais?",
-     "right": [("ODS1", +1), ("ODS15", -3), ("ODS4", -1)],
-     "left": [("ODS15", +2), ("ODS1", -1), ("ODS4", +1)]},
+        {"text": "Reduzir protecoes trabalhistas para atrair investimentos estrangeiros?",
+         "right": [("ODS1", +3), ("ODS3", -2), ("ODS4", -1)],
+         "left": [("ODS3", +2), ("ODS4", +1), ("ODS1", -2)]},
     
-    {"text": "Reduzir protecoes trabalhistas para atrair investimentos estrangeiros?",
-     "right": [("ODS1", +3), ("ODS3", -2), ("ODS4", -1)],
-     "left": [("ODS3", +2), ("ODS4", +1), ("ODS1", -2)]},
+        {"text": "Implementar racionamento de agua em periodos de crise hidrica?",
+         "right": [("ODS15", +2), ("ODS3", -2), ("ODS1", -1)],
+         "left": [("ODS3", +2), ("ODS1", +1), ("ODS15", -2)]},
     
-    {"text": "Implementar racionamento de agua em periodos de crise hidrica?",
-     "right": [("ODS15", +2), ("ODS3", -2), ("ODS1", -1)],
-     "left": [("ODS3", +2), ("ODS1", +1), ("ODS15", -2)]},
-    
-    {"text": "Permitir publicidade infantil para aumentar vendas de produtos nacionais?",
-     "right": [("ODS1", +2), ("ODS4", -2), ("ODS3", -1)],
-     "left": [("ODS4", +2), ("ODS3", +1), ("ODS1", -1)]}
+        {"text": "Permitir publicidade infantil para aumentar vendas de produtos nacionais?",
+         "right": [("ODS1", +2), ("ODS4", -2), ("ODS3", -1)],
+         "left": [("ODS4", +2), ("ODS3", +1), ("ODS1", -1)]}
 ]
-    random.shuffle(cards)
+        random.shuffle(cards)
     
     # --- carta inicial ---
     card_rect = carta_img.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 + 40))
@@ -249,7 +256,13 @@ def rodar_jogo(screen):
                 
                 # Clique no botão de pause
                 elif pause_rect.collidepoint(event.pos):
-                    acao = pause.pause_tela(screen)
+                    dados_do_jogo={
+                        "ods": ods,                    # Estado atual dos ODS
+                        "current_index": current_index, # Carta atual
+                        "cards": cards,
+                        "rem": rem,
+                    }
+                    acao = pause.pause_tela(screen,dados_do_jogo)
                     if acao == "menu":
                         print("🔁 Voltando ao menu principal...")
                         return  # Sai de rodar_jogo() e volta ao main.py
@@ -334,7 +347,7 @@ def rodar_jogo(screen):
 
         
         # --- cartas restantes ---
-        rem = max(0, 10 - current_index)
+        rem = max(0, carta_jogo - current_index)
         rem_surf = FONT.render(f"Cartas restantes: {rem}", True, (40, 40, 40))
         rem_rect = rem_surf.get_rect(center=(SCREEN_W // 2, card_rect.bottom + 22))
         screen.blit(rem_surf, rem_rect)

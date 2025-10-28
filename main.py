@@ -16,7 +16,7 @@ def retomar_progresso():
         with open("progresso.json", "r", encoding="utf-8") as f:
             progresso = json.load(f)
         print("✅ Progresso carregado:", progresso)
-        return jogo.rodar_jogo(screen, progresso)
+        return jogo.rodar_jogo(screen, progresso_carregado=progresso)
     except Exception as e:
         print(f"❌ Erro ao carregar progresso: {e}")
         return jogo.rodar_jogo(screen)

@@ -5,7 +5,7 @@ import os
 import popup_sair
 
 
-def pause_tela(screen, progresso_atual=None):
+def pause_tela(screen, progresso_atual):
     """
     Tela de pausa do jogo.
     Permite salvar progresso atual em arquivo local e sair para o menu.
