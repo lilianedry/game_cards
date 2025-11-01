@@ -18,6 +18,7 @@ def ajuda_tela(screen):
     PRETO = (30, 30, 30)
     CINZA = (240, 240, 240)
     LINE_COLOR = (150, 150, 150)
+    
 
     icones = {
         "pobreza": pygame.image.load("imagens/ajuda.png").convert_alpha(),

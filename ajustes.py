@@ -1,6 +1,6 @@
 import pygame
 
-def ajustes_tela(screen):
+def ajustes_tela(screen, estado_global):
     pygame.init()
     clock = pygame.time.Clock()
 
@@ -18,10 +18,10 @@ def ajustes_tela(screen):
     LINE_COLOR = (150,150,150)
 
     # Estados das opções
-    musica_ativa = True
-    efeitos_ativos = True
+    musica_ativa = estado_global['musica_ativa']
+    efeito_ativo = estado_global['efeito_ativo']
     linguas = ["Portugues", "Ingles", "Espanhol"]
-    indice_lingua = 0
+    indice_lingua = linguas.index(estado_global['lingua'])
 
     # Imagens
     fundo = pygame.image.load("imagens/background.png").convert()
@@ -48,8 +48,14 @@ def ajustes_tela(screen):
                         rodando = False  # volta ao menu
                     elif botao_musica.collidepoint(event.pos):
                         musica_ativa = not musica_ativa
+                        estado_global['musica_ativa']=musica_ativa
+                        if musica_ativa:
+                            pygame.mixer.music.unpause()
+                        else:
+                            pygame.mixer.music.pause()
                     elif botao_efeitos.collidepoint(event.pos):
-                        efeitos_ativos = not efeitos_ativos
+                        efeito_ativo = not efeito_ativo
+                        estado_global['efeito_ativo']=efeito_ativo
                     elif botao_lingua_dir.collidepoint(event.pos):
                         indice_lingua = (indice_lingua + 1) % len(linguas)
                     elif botao_lingua_esq.collidepoint(event.pos):
@@ -98,8 +104,8 @@ def ajustes_tela(screen):
                            (botao_musica.x + (45 if musica_ativa else 15), botao_musica.y + 15), 12)
 
         pygame.draw.rect(screen, CINZA, botao_efeitos, border_radius=15)
-        pygame.draw.circle(screen, VERDE if efeitos_ativos else ROXO,
-                           (botao_efeitos.x + (45 if efeitos_ativos else 15), botao_efeitos.y + 15), 12)
+        pygame.draw.circle(screen, VERDE if efeito_ativo else ROXO,
+                           (botao_efeitos.x + (45 if efeito_ativo else 15), botao_efeitos.y + 15), 12)
 
         # Setas de idioma
         seta_esq = fonte.render("<", True, VERDE)

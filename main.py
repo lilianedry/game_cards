@@ -10,25 +10,25 @@ def retomar_progresso():
     """Le o arquivo de progresso salvo e retoma o jogo."""
     if not os.path.exists("progresso.json"):
         print("Nenhum progresso salvo encontrado. Iniciando novo jogo...")
-        return jogo.rodar_jogo(screen)
+        return jogo.rodar_jogo(screen, estado_global)
 
     try:
         with open("progresso.json", "r", encoding="utf-8") as f:
             progresso = json.load(f)
         print("✅ Progresso carregado:", progresso)
-        return jogo.rodar_jogo(screen, progresso_carregado=progresso)
+        return jogo.rodar_jogo(screen,estado_global, progresso_carregado=progresso)
     except Exception as e:
         print(f"❌ Erro ao carregar progresso: {e}")
-        return jogo.rodar_jogo(screen)
+        return jogo.rodar_jogo(screen,estado_global)
 
 
 def iniciar_jogo():
     """Inicia um novo jogo do zero."""
-    return jogo.rodar_jogo(screen)
+    return jogo.rodar_jogo(screen, estado_global)
 
 
 def opcoes():
-    ajustes.ajustes_tela(screen)
+    ajustes.ajustes_tela(screen, estado_global)
 
 
 def ajuda_acao():
@@ -52,6 +52,22 @@ botoes = [
     menu.Botao(460, 430, 360, 72, "INICIAR JOGO", iniciar_jogo),
     menu.Botao(460, 520, 360, 72, "SAIR", sair)
 ]
+
+try:
+       pygame.mixer.music.load("sons/musica_fundo.mp3")
+       pygame.mixer.music.set_volume(0.5)
+       pygame.mixer.music.play(-1)  # Loop infinito
+       musica_ativa = True
+except Exception as e:
+       print("❌ Erro ao carregar música",  e)
+       musica_ativa = False
+   
+   # Estado global da música (compartilhado entre telas)
+estado_global = {
+       'musica_ativa': musica_ativa,
+       'efeito_ativo': True,
+       'lingua': 'Portugues'
+   }
 
 # --- Icones padronizados (40x40) ---
 try:

@@ -55,9 +55,14 @@ def calcular_altura_texto(lines, font, line_spacing=6):
     return max(0, h - line_spacing)
 
 
-def rodar_jogo(screen,  progresso_carregado=None):
+def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
     clock = pygame.time.Clock()
-
+    if estado_global.get('efeitos_ativos', True):
+        try:
+            som_arrastar=pygame.mixer.Sound("sons/carta.mp3")
+        except Exception as e:
+            print(e)
+        
     try:
         FONT = pygame.font.Font(os.path.join("imagens", "Silkscreen.ttf"), 20)
         FONT_BIG = pygame.font.Font(os.path.join("imagens", "Silkscreen.ttf"), 30)
@@ -252,7 +257,7 @@ def rodar_jogo(screen,  progresso_carregado=None):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 # Clique no botão de ajustes
                 if ajuste_rect.collidepoint(event.pos):
-                    ajustes.ajustes_tela(screen)
+                    ajustes.ajustes_tela(screen, estado_global)
                 
                 # Clique no botão de pause
                 elif pause_rect.collidepoint(event.pos):
@@ -280,9 +285,13 @@ def rodar_jogo(screen,  progresso_carregado=None):
                     center = SCREEN_W // 2
                     if current_index < len(cards):
                         if cx > center + threshold:
+                            if estado_global.get('efeito_ativo', True) and som_arrastar:
+                                som_arrastar.play()
                             apply_effects(cards[current_index]["right"])
                             current_index += 1
                         elif cx < center - threshold:
+                            if estado_global.get('efeito_ativo', True) and som_arrastar:
+                                som_arrastar.play()
                             apply_effects(cards[current_index]["left"])
                             current_index += 1
                         else:
@@ -363,7 +372,7 @@ def rodar_jogo(screen,  progresso_carregado=None):
             from fim_de_jogo import tela_fim_de_jogo
             escolha = tela_fim_de_jogo(screen, venceu=win)
             if escolha == "reiniciar":
-                return rodar_jogo(screen)      # reinicia o jogo
+                return rodar_jogo(screen, estado_global)      # reinicia o jogo
             elif escolha == "menu":
                 return                        # volta ao main.py
 
