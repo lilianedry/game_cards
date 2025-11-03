@@ -42,15 +42,18 @@ def sair():
 
 # --- Inicializacao ---
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+info = pygame.display.Info()
+largura = info.current_w
+altura = info.current_h
+screen = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Meu Jogo")
 clock = pygame.time.Clock()
 
 # --- Botoes de menu principal ---
 botoes = [
-    menu.Botao(460, 340, 360, 72, "RETOMAR PROGRESSO", retomar_progresso),
-    menu.Botao(460, 430, 360, 72, "INICIAR JOGO", iniciar_jogo),
-    menu.Botao(460, 520, 360, 72, "SAIR", sair)
+    menu.Botao((largura/2)-(360/2), 340, 360, 72, "RETOMAR PROGRESSO", retomar_progresso),
+    menu.Botao((largura/2)-(360/2), 430, 360, 72, "INICIAR JOGO", iniciar_jogo),
+    menu.Botao((largura/2)-(360/2), 520, 360, 72, "SAIR", sair)
 ]
 
 try:
@@ -84,7 +87,7 @@ except Exception:
 
 # --- Posicoes dos icones ---
 ajuste_rect = icone_ajuste.get_rect(topleft=(20, 20))
-ajuda_rect = icone_ajuda.get_rect(topright=(1260, 20))  # alinhado ao canto direito
+ajuda_rect = icone_ajuda.get_rect(topright=(largura-20, 20))  # alinhado ao canto direito
 
 # --- Loop principal ---
 running = True

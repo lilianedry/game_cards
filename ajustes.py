@@ -16,6 +16,9 @@ def ajustes_tela(screen, estado_global):
     BRANCO = (255, 255, 255)
     CINZA = (240, 240, 240)
     LINE_COLOR = (150,150,150)
+    info = pygame.display.Info()
+    largura = info.current_w
+    altura = info.current_h
 
     # Estados das opções
     musica_ativa = estado_global['musica_ativa']
@@ -25,7 +28,7 @@ def ajustes_tela(screen, estado_global):
 
     # Imagens
     fundo = pygame.image.load("imagens/background.png").convert()
-    fundo = pygame.transform.scale(fundo, (1280, 720))
+    fundo = pygame.transform.scale(fundo, (largura, altura))
 
     logo = pygame.image.load("imagens/logo.png").convert_alpha()
     logo = pygame.transform.scale(logo, (300, 170))
@@ -33,7 +36,7 @@ def ajustes_tela(screen, estado_global):
     # Retângulos de interação
     botao_musica = pygame.Rect(850, 340, 60, 30)
     botao_efeitos = pygame.Rect(850, 410, 60, 30)
-    botao_lingua_esq = pygame.Rect(720, 480, 40, 40)
+    # botao_lingua_esq = pygame.Rect(720, 480, 40, 40)
     botao_lingua_dir = pygame.Rect(940, 480, 40, 40)
 
     rodando = True
@@ -56,10 +59,10 @@ def ajustes_tela(screen, estado_global):
                     elif botao_efeitos.collidepoint(event.pos):
                         efeito_ativo = not efeito_ativo
                         estado_global['efeito_ativo']=efeito_ativo
-                    elif botao_lingua_dir.collidepoint(event.pos):
-                        indice_lingua = (indice_lingua + 1) % len(linguas)
-                    elif botao_lingua_esq.collidepoint(event.pos):
-                        indice_lingua = (indice_lingua - 1) % len(linguas)
+                    # elif botao_lingua_dir.collidepoint(event.pos):
+                    #     indice_lingua = (indice_lingua + 1) % len(linguas)
+                    # elif botao_lingua_esq.collidepoint(event.pos):
+                    #     indice_lingua = (indice_lingua - 1) % len(linguas)
 
         # Fundo e logo
         screen.blit(fundo, (0, 0))
@@ -95,8 +98,8 @@ def ajustes_tela(screen, estado_global):
         texto_efeitos = fonte.render("EFEITOS SONOROS", True, VERDE)
         screen.blit(texto_efeitos, (220, 420))
 
-        texto_lingua = fonte.render("LINGUA", True, VERDE)
-        screen.blit(texto_lingua, (220, 490))
+        # texto_lingua = fonte.render("LINGUA", True, VERDE)
+        # screen.blit(texto_lingua, (220, 490))
 
         # Botões toggle
         pygame.draw.rect(screen, CINZA, botao_musica, border_radius=15)
@@ -108,14 +111,14 @@ def ajustes_tela(screen, estado_global):
                            (botao_efeitos.x + (45 if efeito_ativo else 15), botao_efeitos.y + 15), 12)
 
         # Setas de idioma
-        seta_esq = fonte.render("<", True, VERDE)
-        seta_dir = fonte.render(">", True, VERDE)
-        screen.blit(seta_esq, (botao_lingua_esq.x + 10, botao_lingua_esq.y + 2))
-        screen.blit(seta_dir, (botao_lingua_dir.x + 30, botao_lingua_dir.y + 2))
+        # seta_esq = fonte.render("<", True, VERDE)
+        # seta_dir = fonte.render(">", True, VERDE)
+        # screen.blit(seta_esq, (botao_lingua_esq.x + 10, botao_lingua_esq.y + 2))
+        # screen.blit(seta_dir, (botao_lingua_dir.x + 30, botao_lingua_dir.y + 2))
 
-        # Idioma atual
-        texto_lingua_atual = fonte.render(linguas[indice_lingua], True, VERDE)
-        screen.blit(texto_lingua_atual, (botao_lingua_esq.x + 60, botao_lingua_esq.y + 5))
+        # # Idioma atual
+        # texto_lingua_atual = fonte.render(linguas[indice_lingua], True, VERDE)
+        # screen.blit(texto_lingua_atual, (botao_lingua_esq.x + 60, botao_lingua_esq.y + 5))
 
         pygame.display.flip()
         clock.tick(60)

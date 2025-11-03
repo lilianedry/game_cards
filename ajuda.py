@@ -18,6 +18,9 @@ def ajuda_tela(screen):
     PRETO = (30, 30, 30)
     CINZA = (240, 240, 240)
     LINE_COLOR = (150, 150, 150)
+    info = pygame.display.Info()
+    largura = info.current_w
+    altura = info.current_h
     
 
     icones = {
@@ -50,7 +53,7 @@ def ajuda_tela(screen):
                 rodando = False
 
         fundo = pygame.image.load("imagens/background.png").convert()
-        fundo = pygame.transform.scale(fundo, (1280, 720))
+        fundo = pygame.transform.scale(fundo, (largura, altura))
         screen.blit(fundo, (0, 0))
 
         logo = pygame.image.load("imagens/logo.png").convert_alpha()
