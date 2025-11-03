@@ -31,7 +31,7 @@ def ajuda_tela(screen):
         icones[chave] = pygame.transform.smoothscale(icones[chave], (40, 40))
 
     textos = [
-        ("pobreza", "POBREZA - Mede a desigualdade social. Valores altos indicam crise econômica."),
+        ("pobreza", "POBREZA - Mede a desigualdade social. Valores baixos indicam crise econômica."),
         ("saude", "SAUDE - Representa o bem-estar da população. Mantenha o equilíbrio."),
         ("educacao", "EDUCACAO - Reflete o acesso ao conhecimento e desenvolvimento do país."),
         ("vida", "VIDA TERRESTRE - Mostra o estado da natureza e dos ecossistemas. Preserve-a.")

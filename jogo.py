@@ -116,8 +116,8 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
         cards = [
     # Cartas mais balanceadas com trade-offs mais difíceis
         {"text": "A populacao mais pobre enfrenta escassez apos seca. Voce libera auxilio emergencial nacional?",
-         "right": [("ODS1", -2), ("ODS4", -2), ("ODS15", +1)],
-         "left": [("ODS1", +2), ("ODS3", -1)]},
+         "right": [("ODS1", +2), ("ODS15", +1)],
+         "left": [("ODS1", -2), ("ODS3", -1)]},
     
         {"text": "Um surto ameaca a populacao rural. Tornar vacina obrigatoria?",
          "right": [("ODS3", +2), ("ODS1", -1)],
@@ -132,7 +132,7 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
          "left": [("ODS15", +2), ("ODS1", -2)]},
 
         {"text": "Implementar ensino remoto obrigatorio para areas rurais?",
-         "right": [("ODS4", +2), ("ODS3", -2), ("ODS1", -1)],
+         "right": [("ODS4", +2), ("ODS3", -2), ("ODS15", -1)],
          "left": [("ODS4", -2), ("ODS15", +1)]},
     
         {"text": "Autorizar novos pesticidas para aumentar producao agricola?",
@@ -241,7 +241,7 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
         for v in ods.values():
             if v <= 0:
                 return True, False
-        if current_index >= 10:
+        if current_index >= 10 or rem<=1:
             return True, True
         return False, False
 
