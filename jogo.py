@@ -114,7 +114,7 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
     
     # --- cartas ---
         cards = [
-    # Cartas mais balanceadas com trade-offs mais difíceis
+    
         {"text": "A populacao mais pobre enfrenta escassez apos seca. Voce libera auxilio emergencial nacional?",
          "right": [("ODS1", +2), ("ODS15", +1)],
          "left": [("ODS1", -2), ("ODS3", -1)]},
@@ -144,7 +144,7 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
          "left": [("ODS3", -2), ("ODS1", +1)]},
     
         {"text": "Obrigar cada empresa a plantar arvores proporcionalmente aos seus funcionarios?",
-         "right": [("ODS15", +2), ("ODS1", -2), ("ODS4", -1)],
+         "right": [("ODS15", +2), ("ODS1", -2), ("ODS4", +1)],
          "left": [("ODS1", +2), ("ODS15", -2)]},
     
         {"text": "Reduzir ultraprocessados mesmo que afete empregos na industria?",
@@ -156,7 +156,7 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
          "left": [("ODS1", +2), ("ODS4", +1)]},
     
         {"text": "Governo reduz drasticamente verbas em setores sociais para equilibrar as contas publicas.",
-         "right": [("ODS1", -3), ("ODS4", -2), ("ODS3", -1)],
+         "right": [("ODS1", +3), ("ODS4", -2), ("ODS3", -1)],
          "left": [("ODS1", +1), ("ODS15", -1)]},
     
         {"text": "Injecao massiva de capital em industrias, mas com flexibilizacao das leis ambientais.",
@@ -245,7 +245,7 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
             return True, True
         return False, False
 
-    # --- loop principal ---
+    # --- loop principal --- 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -262,8 +262,8 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
                 # Clique no botão de pause
                 elif pause_rect.collidepoint(event.pos):
                     dados_do_jogo={
-                        "ods": ods,                    # Estado atual dos ODS
-                        "current_index": current_index, # Carta atual
+                        "ods": ods,                    
+                        "current_index": current_index, 
                         "cards": cards,
                         "rem": rem,
                     }

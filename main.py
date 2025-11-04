@@ -59,7 +59,7 @@ botoes = [
 try:
        pygame.mixer.music.load("sons/musica_fundo.mp3")
        pygame.mixer.music.set_volume(0.5)
-       pygame.mixer.music.play(-1)  # Loop infinito
+       pygame.mixer.music.play(-1) 
        musica_ativa = True
 except Exception as e:
        print("❌ Erro ao carregar música",  e)
@@ -72,7 +72,7 @@ estado_global = {
        'lingua': 'Portugues'
    }
 
-# --- Icones padronizados (40x40) ---
+
 try:
     icone_ajuste = pygame.image.load("imagens/ajuste.png").convert_alpha()
     icone_ajuste = pygame.transform.smoothscale(icone_ajuste, (40, 40))
