@@ -1,11 +1,11 @@
 {
   "ods": {
-    "ODS1": 6,
-    "ODS3": 3,
-    "ODS4": 1,
-    "ODS15": 6
+    "ODS1": 7,
+    "ODS3": 2,
+    "ODS4": 2,
+    "ODS15": 5
   },
-  "current_index": 3,
+  "current_index": 5,
   "cards": [
     {
       "text": "Obrigar cada empresa a plantar arvores proporcionalmente aos seus funcionarios?",
@@ -762,5 +762,5 @@
       ]
     }
   ],
-  "rem": 7
+  "rem": 2
 }
