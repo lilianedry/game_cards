@@ -4,41 +4,49 @@ def ajuda_tela(screen):
     pygame.init()
     clock = pygame.time.Clock()
 
-    # --- Fontes SEPARADAS para título e texto ---
     try:
-        fonte_titulo = pygame.font.Font("imagens/Silkscreen.ttf", 30)  
-        fonte_texto = pygame.font.Font("imagens/Silkscreen.ttf", 15)  
+        fonte_titulo = pygame.font.Font("imagens/PixelOperator8.ttf", 22)
+        fonte_texto = pygame.font.Font("imagens/PixelOperator8.ttf", 17)
     except:
-        fonte_titulo = pygame.font.Font(None, 50)  
-        fonte_texto = pygame.font.Font(None, 25)   
-        print("⚠️ Fonte Silkscreen não encontrada, usando padrão.")
+        fonte_titulo = pygame.font.Font(None, 22)
+        fonte_texto = pygame.font.Font(None, 17)
 
-    # --- Cores ---
     VERDE = (50, 100, 50)
-    PRETO = (30, 30, 30)
-    CINZA = (240, 240, 240)
     LINE_COLOR = (150, 150, 150)
-    info = pygame.display.Info()
-    largura = info.current_w
-    altura = info.current_h
-    
 
-    icones = {
-        "pobreza": pygame.image.load("imagens/economia.png").convert_alpha(),
-        "saude": pygame.image.load("imagens/saude.png").convert_alpha(),
-        "educacao": pygame.image.load("imagens/educacao.png").convert_alpha(),
-        "vida": pygame.image.load("imagens/natureza.png").convert_alpha()
-    }
-
-    for chave in icones:
-        icones[chave] = pygame.transform.smoothscale(icones[chave], (40, 40))
+    largura = screen.get_width()
+    altura = screen.get_height()
 
     textos = [
-        ("pobreza", "POBREZA - Mede a desigualdade social. Valores baixos indicam crise economica."),
-        ("saude", "SAUDE - Representa o bem-estar da populacao. Mantenha o equilibrio."),
-        ("educacao", "EDUCACAO - Reflete o acesso ao conhecimento e desenvolvimento do pais."),
-        ("vida", "VIDA TERRESTRE - Mostra o estado da natureza e dos ecossistemas. Preserve-a.")
+        "Ao iniciar o jogo, uma carta com uma pergunta aparece no centro da tela.",
+        "Arraste a carta para a DIREITA para APROVAR a proposta ou para a ESQUERDA para REJEITAR.",
+        "Cada decisão altera as barras no topo da tela: Pobreza, Saúde, Educação e Vida Terrestre.",
+        "Mantenha os indicadores equilibrados. Se algum chegar a zero, o jogo termina e você perde.",
     ]
+
+    caixa_w, caixa_h = int(largura * 0.78), int(altura * 0.62)
+    caixa_x = (largura - caixa_w) // 2
+    caixa_y = (altura - caixa_h) // 2
+
+    botao_x = pygame.Rect(0, 0, 0, 0)
+
+    def render_text_wrapped(surface, text, font, color, rect, line_spacing=8):
+        words = text.split(' ')
+        lines = []
+        while words:
+            line_words = []
+            while words:
+                line_words.append(words.pop(0))
+                fw, _ = font.size(' '.join(line_words + words[:1]))
+                if fw > rect.width:
+                    break
+            lines.append(' '.join(line_words))
+
+        y = rect.top
+        for line in lines:
+            surf = font.render(line, True, color)
+            surface.blit(surf, (rect.x, y))
+            y += font.get_height() + line_spacing
 
     rodando = True
     while rodando:
@@ -46,11 +54,11 @@ def ajuda_tela(screen):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1 and botao_x.collidepoint(event.pos):
-                    rodando = False
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 rodando = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if botao_x.collidepoint(event.pos):
+                    rodando = False
 
         fundo = pygame.image.load("imagens/background.png").convert()
         fundo = pygame.transform.scale(fundo, (largura, altura))
@@ -60,52 +68,42 @@ def ajuda_tela(screen):
         logo = pygame.transform.scale(logo, (300, 170))
         screen.blit(logo, (80, 10))
 
-        caixa = pygame.Surface((1000, 450), pygame.SRCALPHA)
+        caixa = pygame.Surface((caixa_w, caixa_h), pygame.SRCALPHA)
         caixa.fill((225, 225, 225, 225))
-        screen.blit(caixa, (140, 180))
+        screen.blit(caixa, (caixa_x, caixa_y))
 
-        texto_titulo = fonte_titulo.render("AJUDA", True, VERDE)
-        pos_titulo_x = 220
-        pos_titulo_y = 200  
+        # Margens maiores
+        padding = 60
+
+        texto_titulo = fonte_titulo.render("Ajuda", True, VERDE)
+        pos_titulo_x = caixa_x + padding
+        pos_titulo_y = caixa_y + padding
         screen.blit(texto_titulo, (pos_titulo_x, pos_titulo_y))
 
         texto_x = fonte_titulo.render("X", True, VERDE)
-        largura_x = texto_x.get_width()
-        altura_x = texto_x.get_height()
-        pos_x_x = 1050
+        w_x, h_x = texto_x.get_size()
+        pos_x_x = caixa_x + caixa_w - padding - w_x
         pos_y_x = pos_titulo_y
-        botao_x = pygame.Rect(pos_x_x, pos_y_x, largura_x, altura_x)
+        botao_x = pygame.Rect(pos_x_x, pos_y_x, w_x, h_x)
         screen.blit(texto_x, (pos_x_x, pos_y_x))
 
-        
-        pygame.draw.line(screen, LINE_COLOR, (pos_titulo_x, pos_titulo_y + 50), (1070, pos_titulo_y + 50), 2)
+        pygame.draw.line(
+            screen, LINE_COLOR,
+            (pos_titulo_x, pos_titulo_y + 45),
+            (caixa_x + caixa_w - padding, pos_titulo_y + 45),
+            2
+        )
 
-        
-        def render_text_wrapped(surface, text, font, color, rect, line_spacing=5):
-            words = text.split(' ')
-            lines = []
-            while words:
-                line_words = []
-                while words:
-                    line_words.append(words.pop(0))
-                    fw, _ = font.size(' '.join(line_words + words[:1]))
-                    if fw > rect.width:
-                        break
-                lines.append(' '.join(line_words))
-
-            y = rect.top
-            for line in lines:
-                line_surf = font.render(line, True, color)
-                surface.blit(line_surf, (rect.x, y))
-                y += font.get_height() + line_spacing
-
-        
-        y_inicial = 280  
-        for nome, texto in textos:
-            screen.blit(icones[nome], (180, y_inicial))
-            texto_rect = pygame.Rect(230, y_inicial, 850, 0)
-            render_text_wrapped(screen, texto, fonte_texto, VERDE, texto_rect)  
-            y_inicial += 90  
+        y_inicial = pos_titulo_y + 80  # maior espaço abaixo do título
+        for texto in textos:
+            texto_rect = pygame.Rect(
+                caixa_x + padding,
+                y_inicial,
+                caixa_w - padding * 2,
+                0
+            )
+            render_text_wrapped(screen, texto, fonte_texto, VERDE, texto_rect)
+            y_inicial += 95  # mais espaçamento entre blocos
 
         pygame.display.flip()
         clock.tick(60)

@@ -12,10 +12,10 @@ def popup_confirmar_saida(screen):
     clock = pygame.time.Clock()
 
     # --- Fontes ---
-    fonte_path = "imagens/Silkscreen.ttf"
+    fonte_path = "imagens/PixelOperator8.ttf"
     try:
-        fonte_titulo = pygame.font.Font(fonte_path, 30)
-        fonte_botao = pygame.font.Font(fonte_path, 22)
+        fonte_titulo = pygame.font.Font(fonte_path, 20)
+        fonte_botao = pygame.font.Font(fonte_path, 15)
     except Exception:
         fonte_titulo = pygame.font.Font(None, 48)
         fonte_botao = pygame.font.Font(None, 32)
@@ -49,7 +49,7 @@ def popup_confirmar_saida(screen):
     caixa.fill((225, 225, 225, BG_ALPHA))
 
     # --- Título ---
-    texto_titulo = fonte_titulo.render("CONFIRMAR SAÍDA", True, VERDE)
+    texto_titulo = fonte_titulo.render("Confirmar saída", True, VERDE)
     pos_titulo_x = caixa_x + 40
     pos_titulo_y = caixa_y + 30
     linha_y = pos_titulo_y + 50
@@ -110,8 +110,8 @@ def popup_confirmar_saida(screen):
         pygame.draw.line(screen, LINE_COLOR, (pos_titulo_x, linha_y), (caixa_x + caixa_w - 40, linha_y), 2)
         screen.blit(texto_pergunta, texto_pergunta_rect)
 
-        desenhar_pill(screen, "SAIR", bot_sair, VERDE, hover_sair)
-        desenhar_pill(screen, "CANCELAR", bot_cancelar, VERDE, hover_cancelar)
+        desenhar_pill(screen, "Sair", bot_sair, VERDE, hover_sair)
+        desenhar_pill(screen, "Cancelar", bot_cancelar, VERDE, hover_cancelar)
 
         pygame.display.flip()
         clock.tick(60)

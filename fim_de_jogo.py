@@ -12,10 +12,10 @@ def tela_fim_de_jogo(screen, venceu=False):
     clock = pygame.time.Clock()
 
     # --- Fontes ---
-    fonte_path = "imagens/Silkscreen.ttf"
+    fonte_path = "imagens/PixelOperator8.ttf"
     try:
-        fonte_titulo = pygame.font.Font(fonte_path, 30)
-        fonte_botao = pygame.font.Font(fonte_path, 22)
+        fonte_titulo = pygame.font.Font(fonte_path, 20)
+        fonte_botao = pygame.font.Font(fonte_path, 15)
     except Exception:
         fonte_titulo = pygame.font.Font(None, 48)
         fonte_botao = pygame.font.Font(None, 32)
@@ -45,16 +45,16 @@ def tela_fim_de_jogo(screen, venceu=False):
     caixa.fill((225, 225, 225, BG_ALPHA))
 
     # --- Título ---
-    texto_titulo = fonte_titulo.render("FIM DE JOGO", True, VERDE)
+    texto_titulo = fonte_titulo.render("Fim de jogo", True, VERDE)
     pos_titulo_x = caixa_x + (caixa_w // 2 - texto_titulo.get_width() // 2)
     pos_titulo_y = caixa_y + 40
     linha_y = pos_titulo_y + 45
 
     # --- Mensagem ---
     if venceu:
-        msg = "PARABENS! VOCE SALVOU O PLANETA!"
+        msg = "Parabéns, você salvou o planeta!!"
     else:
-        msg = "UMA ODS CHEGOU A ZERO. FIM DE JOGO."
+        msg = "Uma ODS chegou a zero. Fim de jogo!"
     texto_msg = fonte_botao.render(msg, True, VERDE)
     texto_msg_rect = texto_msg.get_rect(center=(largura // 2, linha_y + 55))
 

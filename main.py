@@ -51,9 +51,9 @@ clock = pygame.time.Clock()
 
 # --- Botoes de menu principal ---
 botoes = [
-    menu.Botao((largura/2)-(360/2), 340, 360, 72, "RETOMAR PROGRESSO", retomar_progresso),
-    menu.Botao((largura/2)-(360/2), 430, 360, 72, "INICIAR JOGO", iniciar_jogo),
-    menu.Botao((largura/2)-(360/2), 520, 360, 72, "SAIR", sair)
+    menu.Botao((largura/2)-(360/2), 340, 360, 72, "Retomar progresso", retomar_progresso),
+    menu.Botao((largura/2)-(360/2), 430, 360, 72, "iniciar jogo", iniciar_jogo),
+    menu.Botao((largura/2)-(360/2), 520, 360, 72, "Sair", sair)
 ]
 
 try:

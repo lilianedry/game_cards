@@ -64,11 +64,11 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
             print(e)
         
     try:
-        FONT = pygame.font.Font(os.path.join("imagens", "Silkscreen.ttf"), 20)
-        FONT_BIG = pygame.font.Font(os.path.join("imagens", "Silkscreen.ttf"), 30)
+        FONT = pygame.font.Font(os.path.join("imagens", "PixelOperator8.ttf"), 15)
+        FONT_BIG = pygame.font.Font(os.path.join("imagens", "PixelOperator8.ttf"), 20)
     except Exception:
-        FONT = pygame.font.SysFont("dejavusans", 20)
-        FONT_BIG = pygame.font.SysFont("dejavusans", 30)
+        FONT = pygame.font.SysFont("dejavusans", 15)
+        FONT_BIG = pygame.font.SysFont("dejavusans", 20)
 
     SCREEN_W, SCREEN_H = screen.get_size()
 

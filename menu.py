@@ -69,7 +69,7 @@ class Botao:
             # render texto (usa fonte passada ou padrao)
             if fonte is None:
                 try:
-                    fonte = pygame.font.Font("imagens/Silkscreen.ttf", 22)
+                    fonte = pygame.font.Font("imagens/PixelOperator8.ttf", 22)
                 except Exception:
                     fonte = pygame.font.Font(None, 32)
             text_surf = fonte.render(self.texto, True, cor_texto)
@@ -91,9 +91,9 @@ def desenhar_tela(screen, botoes, eventos=None):
 
     # fonte para pill buttons
     try:
-        fonte = pygame.font.Font("imagens/Silkscreen.ttf", 22)
+        fonte = pygame.font.Font("imagens/PixelOperator8.ttf", 15)
     except:
-        fonte = pygame.font.Font(None, 32)
+        fonte = pygame.font.Font(None, 20)
 
     # fundo e logo com fallback
     try:

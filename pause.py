@@ -13,10 +13,10 @@ def pause_tela(screen, progresso_atual):
     clock = pygame.time.Clock()
 
     # --- Fontes ---
-    fonte_path = "imagens/Silkscreen.ttf"
+    fonte_path = "imagens/PixelOperator8.ttf"
     try:
-        fonte_titulo = pygame.font.Font(fonte_path, 30)
-        fonte_botao = pygame.font.Font(fonte_path, 22)
+        fonte_titulo = pygame.font.Font(fonte_path, 20)
+        fonte_botao = pygame.font.Font(fonte_path, 15)
     except Exception:
         fonte_titulo = pygame.font.Font(None, 50)
         fonte_botao = pygame.font.Font(None, 28)
@@ -51,7 +51,7 @@ def pause_tela(screen, progresso_atual):
     caixa.fill((225, 225, 225, BG_ALPHA))
 
     # --- Título e botão X ---
-    texto_titulo = fonte_titulo.render("PAUSADO", True, VERDE)
+    texto_titulo = fonte_titulo.render("Jogo pausado", True, VERDE)
     pos_titulo_x = caixa_x + 40
     pos_titulo_y = caixa_y + 20
 
@@ -142,8 +142,8 @@ def pause_tela(screen, progresso_atual):
         screen.blit(texto_x, (pos_x_x, pos_y_x))
         pygame.draw.line(screen, LINE_COLOR, (pos_titulo_x, pos_titulo_y + 50),
                          (caixa_x + caixa_w - 20, pos_titulo_y + 50), 2)
-        desenhar_pill(screen, "SALVAR PROGRESSO", bot_salvar, VERDE, hover_salvar)
-        desenhar_pill(screen, "SAIR DO JOGO", bot_sair, VERDE, hover_sair)
+        desenhar_pill(screen, "Salvar progresso", bot_salvar, VERDE, hover_salvar)
+        desenhar_pill(screen, "Sair do jogo", bot_sair, VERDE, hover_sair)
 
         if mensagem:
             msg_surf = fonte_botao.render(mensagem, True, VERDE)
