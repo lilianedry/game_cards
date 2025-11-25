@@ -363,9 +363,9 @@ def rodar_jogo(screen, estado_global=None, progresso_carregado=None):
 
         # --- feedback visual ---
         if card_rect.centerx > SCREEN_W // 2 + threshold * 0.5:
-            screen.blit(FONT_BIG.render("APROVAR ✓", True, (30, 120, 30)), (SCREEN_W - 260, SCREEN_H // 2 + CARD_H // 3))
+            screen.blit(FONT_BIG.render("APROVAR", True, (30, 120, 30)), (SCREEN_W - 260, SCREEN_H // 2 + CARD_H // 3))
         elif card_rect.centerx < SCREEN_W // 2 - threshold * 0.5:
-            screen.blit(FONT_BIG.render("REJEITAR ✕", True, (150, 30, 30)), (40, SCREEN_H // 2 + CARD_H // 3))
+            screen.blit(FONT_BIG.render("REJEITAR", True, (150, 30, 30)), (40, SCREEN_H // 2 + CARD_H // 3))
 
         # --- fim de jogo ---
         if game_over:

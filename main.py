@@ -16,10 +16,10 @@ def retomar_progresso():
         with open("progresso.json", "r", encoding="utf-8") as f:
             progresso = json.load(f)
         print("✅ Progresso carregado:", progresso)
-        return jogo.rodar_jogo(screen,estado_global, progresso_carregado=progresso)
+        return jogo.rodar_jogo(screen, estado_global, progresso_carregado=progresso)
     except Exception as e:
         print(f"❌ Erro ao carregar progresso: {e}")
-        return jogo.rodar_jogo(screen,estado_global)
+        return jogo.rodar_jogo(screen, estado_global)
 
 
 def iniciar_jogo():
@@ -49,29 +49,21 @@ screen = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Meu Jogo")
 clock = pygame.time.Clock()
 
-# --- Botoes de menu principal ---
-botoes = [
-    menu.Botao((largura/2)-(360/2), 340, 360, 72, "Retomar progresso", retomar_progresso),
-    menu.Botao((largura/2)-(360/2), 430, 360, 72, "iniciar jogo", iniciar_jogo),
-    menu.Botao((largura/2)-(360/2), 520, 360, 72, "Sair", sair)
-]
-
 try:
-       pygame.mixer.music.load("sons/musica_fundo.mp3")
-       pygame.mixer.music.set_volume(0.5)
-       pygame.mixer.music.play(-1) 
-       musica_ativa = True
+    pygame.mixer.music.load("sons/musica_fundo.mp3")
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)
+    musica_ativa = True
 except Exception as e:
-       print("❌ Erro ao carregar música",  e)
-       musica_ativa = False
-   
-   # Estado global da música (compartilhado entre telas)
-estado_global = {
-       'musica_ativa': musica_ativa,
-       'efeito_ativo': True,
-       'lingua': 'Portugues'
-   }
+    print("❌ Erro ao carregar música", e)
+    musica_ativa = False
 
+# Estado global
+estado_global = {
+    'musica_ativa': musica_ativa,
+    'efeito_ativo': True,
+    'lingua': 'Portugues'
+}
 
 try:
     icone_ajuste = pygame.image.load("imagens/ajuste.png").convert_alpha()
@@ -87,7 +79,32 @@ except Exception:
 
 # --- Posicoes dos icones ---
 ajuste_rect = icone_ajuste.get_rect(topleft=(20, 20))
-ajuda_rect = icone_ajuda.get_rect(topright=(largura-20, 20))  # alinhado ao canto direito
+ajuda_rect = icone_ajuda.get_rect(topright=(largura - 20, 20))
+
+
+# =====================================================================
+#  BOTÕES DO MENU PRINCIPAL (AGORA DEPENDEM DO ARQUIVO progresso.json)
+# =====================================================================
+botoes = []
+
+if os.path.exists("progresso.json"):
+    # Com progresso salvo → mostra Retomar
+    botoes.append(menu.Botao((largura / 2) - (360 / 2), 340, 360, 72,
+                             "Retomar progresso", retomar_progresso))
+    botoes.append(menu.Botao((largura / 2) - (360 / 2), 430, 360, 72,
+                             "Iniciar jogo", iniciar_jogo))
+    botoes.append(menu.Botao((largura / 2) - (360 / 2), 520, 360, 72,
+                             "Sair", sair))
+else:
+    # Sem progresso salvo → NÃO mostra o botão Retomar
+    botoes.append(menu.Botao((largura / 2) - (360 / 2), 380, 360, 72,
+                             "Iniciar jogo", iniciar_jogo))
+    botoes.append(menu.Botao((largura / 2) - (360 / 2), 470, 360, 72,
+                             "Sair", sair))
+
+
+# =====================================================================
+
 
 # --- Loop principal ---
 running = True
