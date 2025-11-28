@@ -2,7 +2,7 @@
 import pygame
 import sys
 
-def tela_fim_de_jogo(screen, venceu=False):
+def tela_fim_de_jogo(screen, venceu=False, ods_zerada=None):
     """
     Tela de fim de jogo — exibida ao ganhar ou perder.
     Opcoes:
@@ -54,7 +54,9 @@ def tela_fim_de_jogo(screen, venceu=False):
     if venceu:
         msg = "Parabéns, você salvou o planeta!!"
     else:
-        msg = "Uma ODS chegou a zero. Fim de jogo!"
+        msg = f"A {ods_zerada} chegou a zero. Fim de jogo!"
+    
+
     texto_msg = fonte_botao.render(msg, True, VERDE)
     texto_msg_rect = texto_msg.get_rect(center=(largura // 2, linha_y + 55))
 

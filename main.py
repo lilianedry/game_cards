@@ -7,7 +7,7 @@ import json
 import os
 
 def retomar_progresso():
-    """Le o arquivo de progresso salvo e retoma o jogo."""
+    """Lê o arquivo de progresso salvo e retoma o jogo."""
     if not os.path.exists("progresso.json"):
         print("Nenhum progresso salvo encontrado. Iniciando novo jogo...")
         return jogo.rodar_jogo(screen, estado_global)
@@ -49,6 +49,7 @@ screen = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Meu Jogo")
 clock = pygame.time.Clock()
 
+# --- Música de fundo ---
 try:
     pygame.mixer.music.load("sons/musica_fundo.mp3")
     pygame.mixer.music.set_volume(0.5)
@@ -65,6 +66,7 @@ estado_global = {
     'lingua': 'Portugues'
 }
 
+# --- Ícones de ajuste e ajuda ---
 try:
     icone_ajuste = pygame.image.load("imagens/ajuste.png").convert_alpha()
     icone_ajuste = pygame.transform.smoothscale(icone_ajuste, (40, 40))
@@ -83,26 +85,28 @@ ajuda_rect = icone_ajuda.get_rect(topright=(largura - 20, 20))
 
 
 # =====================================================================
-#  BOTÕES DO MENU PRINCIPAL (AGORA DEPENDEM DO ARQUIVO progresso.json)
+#  FUNÇÃO PARA CRIAR BOTÕES DO MENU PRINCIPAL
+#  (AGORA DEPENDEM DINAMICAMENTE DO ARQUIVO progresso.json)
 # =====================================================================
-botoes = []
+def criar_botoes_menu():
+    botoes = []
+    centro_x = (largura / 2) - (360 / 2)
 
-if os.path.exists("progresso.json"):
-    # Com progresso salvo → mostra Retomar
-    botoes.append(menu.Botao((largura / 2) - (360 / 2), 340, 360, 72,
-                             "Retomar progresso", retomar_progresso))
-    botoes.append(menu.Botao((largura / 2) - (360 / 2), 430, 360, 72,
-                             "Iniciar jogo", iniciar_jogo))
-    botoes.append(menu.Botao((largura / 2) - (360 / 2), 520, 360, 72,
-                             "Sair", sair))
-else:
-    # Sem progresso salvo → NÃO mostra o botão Retomar
-    botoes.append(menu.Botao((largura / 2) - (360 / 2), 380, 360, 72,
-                             "Iniciar jogo", iniciar_jogo))
-    botoes.append(menu.Botao((largura / 2) - (360 / 2), 470, 360, 72,
-                             "Sair", sair))
-
-
+    if os.path.exists("progresso.json"):
+        # Com progresso salvo → mostra Retomar
+        botoes.append(menu.Botao(centro_x, 340, 360, 72,
+                                 "Retomar progresso", retomar_progresso))
+        botoes.append(menu.Botao(centro_x, 430, 360, 72,
+                                 "Iniciar jogo", iniciar_jogo))
+        botoes.append(menu.Botao(centro_x, 520, 360, 72,
+                                 "Sair", sair))
+    else:
+        # Sem progresso salvo → NÃO mostra o botão Retomar
+        botoes.append(menu.Botao(centro_x, 380, 360, 72,
+                                 "Iniciar jogo", iniciar_jogo))
+        botoes.append(menu.Botao(centro_x, 470, 360, 72,
+                                 "Sair", sair))
+    return botoes
 # =====================================================================
 
 
@@ -116,14 +120,17 @@ while running:
 
     screen.fill((0, 0, 0))
 
+    # (RE)CRIA OS BOTÕES A CADA LOOP, BASEADO NO progresso.json
+    botoes = criar_botoes_menu()
+
     # Desenha o menu principal
     acao = menu.desenhar_tela(screen, botoes, eventos)
 
-    # Desenha os icones padronizados
+    # Desenha os ícones padronizados
     screen.blit(icone_ajuste, ajuste_rect)
     screen.blit(icone_ajuda, ajuda_rect)
 
-    # Detecta cliques nos icones
+    # Detecta cliques nos ícones
     for event in eventos:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if ajuste_rect.collidepoint(event.pos):
@@ -131,7 +138,7 @@ while running:
             elif ajuda_rect.collidepoint(event.pos):
                 ajuda_acao()
 
-    # Executa acao dos botoes
+    # Executa acao dos botoes (Iniciar, Retomar, Sair)
     if acao:
         acao()
 
