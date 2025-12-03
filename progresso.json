@@ -1,0 +1,766 @@
+{
+  "ods": {
+    "ODS1": 6,
+    "ODS3": 2,
+    "ODS4": 4,
+    "ODS15": 7
+  },
+  "current_index": 2,
+  "cards": [
+    {
+      "text": "Reduzir prote\u00e7\u00f5es trabalhistas para atrair investimentos estrangeiros?",
+      "right": [
+        [
+          "ODS1",
+          3
+        ],
+        [
+          "ODS3",
+          -2
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS3",
+          2
+        ],
+        [
+          "ODS4",
+          1
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ]
+    },
+    {
+      "text": "Permitir minera\u00e7\u00e3o em terras ind\u00edgenas para gerar royalties para as comunidades?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -3
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS1",
+          -2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Obrigar cada empresa a plantar \u00e1rvores proporcionalmente ao n\u00famero de funcion\u00e1rios?",
+      "right": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS1",
+          -2
+        ],
+        [
+          "ODS4",
+          1
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -2
+        ]
+      ]
+    },
+    {
+      "text": "Implementar semana de quatro dias nas escolas p\u00fablicas para reduzir custos?",
+      "right": [
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          1
+        ]
+      ],
+      "left": [
+        [
+          "ODS4",
+          2
+        ],
+        [
+          "ODS1",
+          -2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Aprovar lei que permite trabalho infantil em neg\u00f3cios familiares?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS4",
+          -3
+        ],
+        [
+          "ODS3",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS4",
+          2
+        ],
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ]
+    },
+    {
+      "text": "Reduzir a idade penal para combater a viol\u00eancia, mesmo afetando programas sociais?",
+      "right": [
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS4",
+          1
+        ],
+        [
+          "ODS1",
+          1
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Permitir queimadas controladas para agricultura tradicional?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -3
+        ],
+        [
+          "ODS3",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          3
+        ],
+        [
+          "ODS1",
+          -2
+        ],
+        [
+          "ODS3",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "Criar um programa nacional de profissionais em medicina ambiental?",
+      "right": [
+        [
+          "ODS3",
+          2
+        ],
+        [
+          "ODS15",
+          1
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS3",
+          -2
+        ],
+        [
+          "ODS1",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "Reduzir o consumo de ultraprocessados, mesmo que afete empregos na ind\u00fastria?",
+      "right": [
+        [
+          "ODS3",
+          2
+        ],
+        [
+          "ODS1",
+          -3
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Permitir publicidade infantil para aumentar as vendas de produtos nacionais?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS4",
+          2
+        ],
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS1",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Investir em energia solar e hortas nas escolas p\u00fablicas?",
+      "right": [
+        [
+          "ODS4",
+          2
+        ],
+        [
+          "ODS15",
+          1
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS1",
+          2
+        ]
+      ]
+    },
+    {
+      "text": "Um surto amea\u00e7a a popula\u00e7\u00e3o rural. Tornar a vacina obrigat\u00f3ria?",
+      "right": [
+        [
+          "ODS3",
+          2
+        ],
+        [
+          "ODS1",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS3",
+          -2
+        ],
+        [
+          "ODS1",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "Permitir o patenteamento de sementes nativas por multinacionais?",
+      "right": [
+        [
+          "ODS1",
+          1
+        ],
+        [
+          "ODS15",
+          -3
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS1",
+          -1
+        ],
+        [
+          "ODS4",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "Autorizar novos pesticidas para aumentar a produ\u00e7\u00e3o agr\u00edcola?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -2
+        ],
+        [
+          "ODS3",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS1",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Criar renda b\u00e1sica para quem cuida de \u00e1reas de reflorestamento?",
+      "right": [
+        [
+          "ODS1",
+          -2
+        ],
+        [
+          "ODS15",
+          1
+        ],
+        [
+          "ODS4",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS4",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "Autorizar a amplia\u00e7\u00e3o do cultivo em reservas naturais para aumentar a produ\u00e7\u00e3o de alimentos?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -3
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ]
+    },
+    {
+      "text": "Implementar ensino remoto obrigat\u00f3rio para \u00e1reas rurais?",
+      "right": [
+        [
+          "ODS4",
+          2
+        ],
+        [
+          "ODS3",
+          -2
+        ],
+        [
+          "ODS15",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS15",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "Implementar racionamento de \u00e1gua em per\u00edodos de crise h\u00eddrica?",
+      "right": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS3",
+          -2
+        ],
+        [
+          "ODS1",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS3",
+          2
+        ],
+        [
+          "ODS1",
+          1
+        ],
+        [
+          "ODS15",
+          -2
+        ]
+      ]
+    },
+    {
+      "text": "O governo deve reduzir drasticamente verbas de setores sociais para equilibrar as contas p\u00fablicas?",
+      "right": [
+        [
+          "ODS1",
+          3
+        ],
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          1
+        ],
+        [
+          "ODS15",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Promover inje\u00e7\u00e3o massiva de capital em ind\u00fastrias, com flexibiliza\u00e7\u00e3o das leis ambientais?",
+      "right": [
+        [
+          "ODS1",
+          3
+        ],
+        [
+          "ODS15",
+          -3
+        ],
+        [
+          "ODS3",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ]
+    },
+    {
+      "text": "Implementar ped\u00e1gio urbano para reduzir congestionamentos e polui\u00e7\u00e3o?",
+      "right": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -1
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Investir pesado em armamento para a seguran\u00e7a p\u00fablica?",
+      "right": [
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS1",
+          -3
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS4",
+          1
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Permitir cultivo transg\u00eanico em larga escala para combater a fome?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          -2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ],
+      "left": [
+        [
+          "ODS15",
+          2
+        ],
+        [
+          "ODS1",
+          -1
+        ],
+        [
+          "ODS3",
+          1
+        ]
+      ]
+    },
+    {
+      "text": "A popula\u00e7\u00e3o mais pobre enfrenta escassez ap\u00f3s uma seca. Voc\u00ea libera aux\u00edlio emergencial nacional?",
+      "right": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS15",
+          1
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          -2
+        ],
+        [
+          "ODS3",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Obrigar empresas a oferecer creches gratuitas para suas funcion\u00e1rias?",
+      "right": [
+        [
+          "ODS4",
+          2
+        ],
+        [
+          "ODS1",
+          1
+        ],
+        [
+          "ODS3",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS3",
+          2
+        ],
+        [
+          "ODS4",
+          -2
+        ],
+        [
+          "ODS1",
+          -1
+        ]
+      ]
+    },
+    {
+      "text": "Destinar verba da sa\u00fade para campanhas de preven\u00e7\u00e3o em vez de tratamentos?",
+      "right": [
+        [
+          "ODS3",
+          1
+        ],
+        [
+          "ODS4",
+          1
+        ],
+        [
+          "ODS1",
+          -2
+        ]
+      ],
+      "left": [
+        [
+          "ODS1",
+          2
+        ],
+        [
+          "ODS3",
+          -2
+        ],
+        [
+          "ODS4",
+          -1
+        ]
+      ]
+    }
+  ],
+  "rem": 8
+}

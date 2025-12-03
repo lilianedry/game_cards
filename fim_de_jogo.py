@@ -1,15 +1,16 @@
-# fim_de_jogo.py
 import pygame
 import sys
 
 def tela_fim_de_jogo(screen, venceu=False, ods_zerada=None):
-    """
-    Tela de fim de jogo — exibida ao ganhar ou perder.
-    Opcoes:
-      - REINICIAR → reinicia o jogo (retorna "reiniciar")
-      - PAGINA INICIAL → volta para o main.py (retorna "menu")
-    """
     clock = pygame.time.Clock()
+
+    # Dicionário com nomes das ODS
+    ODS_DESCRIPTION = {
+        "ODS1": "Erradicação da Pobreza",
+        "ODS3": "Saúde e Bem-Estar",
+        "ODS4": "Educação de Qualidade",
+        "ODS15": "Natureza / Vida Terrestre"
+    }
 
     # --- Fontes ---
     fonte_path = "imagens/PixelOperator8.ttf"
@@ -19,7 +20,6 @@ def tela_fim_de_jogo(screen, venceu=False, ods_zerada=None):
     except Exception:
         fonte_titulo = pygame.font.Font(None, 48)
         fonte_botao = pygame.font.Font(None, 32)
-        print("⚠️ Fonte Silkscreen nao encontrada, usando padrao.")
 
     # --- Cores ---
     VERDE = (50, 100, 50)
@@ -37,14 +37,13 @@ def tela_fim_de_jogo(screen, venceu=False, ods_zerada=None):
         fundo = pygame.Surface((largura, altura))
         fundo.fill((230, 230, 230))
 
-    # --- Caixa translúcida ---
+    # --- Caixa ---
     caixa_w, caixa_h = int(largura * 0.55), int(altura * 0.45)
     caixa_x = (largura - caixa_w) // 2
     caixa_y = (altura - caixa_h) // 2
     caixa = pygame.Surface((caixa_w, caixa_h), pygame.SRCALPHA)
     caixa.fill((225, 225, 225, BG_ALPHA))
 
-    # --- Título ---
     texto_titulo = fonte_titulo.render("Fim de jogo", True, VERDE)
     pos_titulo_x = caixa_x + (caixa_w // 2 - texto_titulo.get_width() // 2)
     pos_titulo_y = caixa_y + 40
@@ -54,13 +53,13 @@ def tela_fim_de_jogo(screen, venceu=False, ods_zerada=None):
     if venceu:
         msg = "Parabéns, você salvou o planeta!!"
     else:
-        msg = f"A {ods_zerada} chegou a zero. Fim de jogo!"
-    
+        descricao = ODS_DESCRIPTION.get(ods_zerada, ods_zerada)
+        msg = f"Você zerou a ODS: {descricao}!"
 
     texto_msg = fonte_botao.render(msg, True, VERDE)
     texto_msg_rect = texto_msg.get_rect(center=(largura // 2, linha_y + 55))
 
-    # --- Botoes lado a lado ---
+    # --- Botões ---
     espacamento = 40
     largura_botao = 240
     altura_botao = 60
@@ -108,14 +107,13 @@ def tela_fim_de_jogo(screen, venceu=False, ods_zerada=None):
                 acao = "menu"
                 rodando = False
 
-        # --- Desenho completo ---
         screen.blit(fundo, (0, 0))
         screen.blit(caixa, (caixa_x, caixa_y))
         screen.blit(texto_titulo, (pos_titulo_x, pos_titulo_y))
         pygame.draw.line(screen, LINE_COLOR, (caixa_x + 40, linha_y), (caixa_x + caixa_w - 40, linha_y), 2)
         screen.blit(texto_msg, texto_msg_rect)
         desenhar_pill(screen, "REINICIAR", bot_reiniciar, VERDE, hover_reiniciar)
-        desenhar_pill(screen, "PAGINA INICIAL", bot_menu, VERDE, hover_menu)
+        desenhar_pill(screen, "MENU", bot_menu, VERDE, hover_menu)
 
         pygame.display.flip()
         clock.tick(60)
