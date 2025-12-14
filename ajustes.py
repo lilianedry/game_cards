@@ -39,11 +39,11 @@ def ajustes_tela(screen, estado_global):
 
     # Carregar som de clique APENAS se efeito_ativo = True
     som_click = None
-    if efeito_ativo:
-        try:
-            som_click = pygame.mixer.Sound("imagens/click.wav")
-        except:
-            print("⚠️ Arquivo de som 'click.wav' não encontrado.")
+    # if efeito_ativo:
+    #     try:
+    #         som_click = pygame.mixer.Sound("imagens/click.wav")
+    #     except:
+    #         print("⚠️ Arquivo de som 'click.wav' não encontrado.")
 
     # Botões posicionados com margens maiores
     botao_musica = pygame.Rect(caixa_x + caixa_w - padding - 70, caixa_y + padding + 70, 70, 35)
@@ -86,16 +86,16 @@ def ajustes_tela(screen, estado_global):
                     estado_global['efeito_ativo'] = efeito_ativo
 
                     # Atualizar som_click dinamicamente
-                    if efeito_ativo:
-                        try:
-                            som_click = pygame.mixer.Sound("imagens/click.wav")
-                        except:
-                            som_click = None
-                    else:
-                        som_click = None
+                    # if efeito_ativo:
+                    #     try:
+                    #         som_click = pygame.mixer.Sound("imagens/click.wav")
+                    #     except:
+                    #         som_click = None
+                    # else:
+                    #     som_click = None
 
-                    if efeito_ativo and som_click:
-                        som_click.play()
+                    # if efeito_ativo and som_click:
+                    #     som_click.play()
 
         # --- Desenho da tela ---
         screen.blit(fundo, (0, 0))
